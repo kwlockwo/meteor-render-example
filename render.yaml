@@ -1,0 +1,31 @@
+# !!!! WARNING, this will deploy paid services !!!!
+services:
+  # A Node web service
+  - type: web
+    name: my-meteor-service
+    runtime: node
+    region: oregon
+    plan: starter
+    buildCommand: ./render-build.sh
+    startCommand: ./render-start.sh
+    envVars:
+    - key: MONGO_HOST
+      fromService:
+        name: mongodb
+        type: pserv
+        property: host
+    - key: MONGO_PORT
+      fromService:
+        name: mongodb
+        type: pserv
+        property: port
+  # MongoDB
+  - type: pserv
+    name: mongodb
+    runtime: docker
+    repo: https://github.com/render-examples/mongodb.git
+    autoDeploy: false
+    disk:
+      name: data
+      mountPath: /data/db
+      sizeGB: 10
