@@ -31,9 +31,6 @@ fi
 
 mkdir -p $METEOR_DIR
 
-echo "$METEOR_DIR"
-ls -la $METEOR_DIR/.meteor/meteor
-
 if [ -e "$METEOR_DIR/.meteor/meteor" ]; then
   echo "... Existing Meteor installation found, using it."
 else
